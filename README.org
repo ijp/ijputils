@@ -1,0 +1,10 @@
+* ijputils
+
+This is just a dump of various bits and pieces I've written under a
+common repo.
+
+If you see something you like, take it, make something useful, and
+send me a note.
+
+All code in this repo, unless otherwise stated, is available under the
+terms of the 3-clause BSD license
