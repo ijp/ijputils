@@ -1,6 +1,97 @@
 #!r6rs
 (library (ijputils lists)
-(export )
+(export range
+        plist->alist
+        shift-left
+        shift-right
+        foldl
+        foldr
+        foldl1
+        foldr1
+        ;; aliases for foldl1 and foldr1
+        fold-left*
+        fold-right*
+        pairwise
+        uniq ;; A better name for `uniq` may be `squeeze` as used in
+        ;; ruby for strings
+        uniq-by
+        group
+        group-by
+        remove-from
+        insert-at
+        chunk
+        split-at*
+        but-last
+        insert-at-each ; meant as a helper for permutations, but may
+                       ; be useful in it's own right
+        ;;Data.List
+        intersperse
+        intercalate
+        transpose
+        subsequences
+        permutations
+        init ;alias for but-last
+        inits
+        tails
+
+        ;; N.B. scans use the haskell order for the successor function
+        scan-left
+        scan-right
+        scan-left*
+        scan-right*
+        scanr
+        scanl
+        scanr1
+        scanl1
+
+        transpose*
+        pad
+        pad-right
+
+        sum
+        product
+        maximum
+        minimum
+
+        alternates
+        merge
+        
+        plist->alist*
+        unzip
+        unzip*
+
+        distinct?
+        
+        map-if
+
+        segregate-by
+
+        insert
+
+        cross-product
+        cross-product/apply
+
+        unfold*
+        unfold**
+
+        ;; list morphisms
+        cata ;; fold-right
+        ana  ;; unfold*
+        hylo ;; (compose ana cata)
+        para ;; special kind of fold-right
+             ;; see also pair-fold-right
+
+        refold ;; better name for hylomorphisms
+
+        segments
+
+        snoc
+
+        map-accumulate
+        map-accumulate-right
+        mapAccumL ;; synonyms for above
+        mapAccumR
+        )
 (import (except (rnrs base) map)
         (rnrs control)
         (only (srfi :1) iota alist-cons append-reverse concatenate map make-list zip last drop-right member pair-fold pair-fold-right)
