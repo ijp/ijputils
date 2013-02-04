@@ -13,6 +13,16 @@
         block
         push!
         pop!
+        and=>
+        eof=>
+        make-counter
+        first
+        rest
+        non-negative?
+        non-positive?
+        non-zero?
+        incr!
+        decr!
         )
 (import (rnrs base)
         (only (rnrs lists) fold-left))
@@ -61,5 +71,45 @@
   (begin0
     (car list)
     (set! list (cdr list))))
+
+(define (and=> val proc)
+  (and val (proc val)))
+
+(define (eof=> x p)
+  (if (eof-object? x)
+      x
+      (p x)))
+
+(define (make-counter n)
+  (lambda ()
+    (let ((ret n))
+      (set! n (+ n 1))
+      ret)))
+
+(define first car)
+(define rest cdr)
+
+(define (non-negative? n)
+  (not (negative? n)))
+
+(define (non-positive? n)
+  (not (positive? n)))
+
+(define (non-zero? n)
+  (not (zero? n)))
+
+(define-syntax incr!
+  (syntax-rules ()
+    ((incr! var)
+     (set! var (+ var 1)))
+    ((incr! var by)
+     (set! var (+ var by)))))
+
+(define-syntax decr!
+  (syntax-rules ()
+    ((decr! var)
+     (set! var (- var 1)))
+    ((decr! var by)
+     (set! var (- var by)))))
 
 )
