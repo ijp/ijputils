@@ -25,6 +25,7 @@
         decr!
         )
 (import (rnrs base)
+        (only (rnrs io ports) eof-object?)
         (only (rnrs lists) fold-left))
 
 (define empty '())

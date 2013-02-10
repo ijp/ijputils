@@ -99,7 +99,7 @@
         (rnrs hashtables)
         (wak foof-loop)
         (srfi :8)
-        (ijputils common)
+        (except (ijputils common) sum)
         )
 
 (define (chunk list n)
