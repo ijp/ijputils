@@ -23,6 +23,7 @@
         non-zero?
         incr!
         decr!
+        where
         )
 (import (rnrs base)
         (only (rnrs io ports) eof-object?)
@@ -113,4 +114,6 @@
     ((decr! var by)
      (set! var (- var by)))))
 
+(define-syntax-rule (where body binding ...)
+  (letrec* (binding ...) body))
 )
