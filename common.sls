@@ -24,6 +24,7 @@
         incr!
         decr!
         where
+        reciprocal
         )
 (import (rnrs base)
         (only (rnrs io ports) eof-object?)
@@ -116,4 +117,8 @@
 
 (define-syntax-rule (where body binding ...)
   (letrec* (binding ...) body))
+
+(define (reciprocal x)
+  (/ 1 x))
+
 )
