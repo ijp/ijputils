@@ -1,6 +1,11 @@
 #!r6rs
 (library (ijputils streams)
-(export naturals
+(export ;; Utilities
+        stream-every
+        stream-scale
+        stream-cons*
+        ;; Streams
+        naturals
         fibonaccis
         rationals
         positive-rationals
