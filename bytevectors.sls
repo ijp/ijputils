@@ -8,10 +8,15 @@
         bytevector-xor
         bytevector-ior
         bytevector-and
+
+        hex-string->bytevector
+        bytevector->hex-string
         )
 (import (rnrs base)
         (rnrs bytevectors)
         (rnrs arithmetic bitwise)
+        (only (srfi :13 strings) string-concatenate-reverse string-pad)
+        (only (srfi :14 char-sets) char-set:hex-digit char-set-contains?)
         (wak foof-loop))
 
 (define (subbytevector bv start end)  
@@ -66,5 +71,33 @@
 
 (define (bytevector-and b1 b2)
   (bytevector-zip bitwise-and b1 b2))
+
+
+;; TODO: need foof loop iterators for bytevectors
+(define (bytevector->hex-string bv)
+  (define (byte->hex n)
+    (string-pad (number->string n 16) 2 #\0))
+  (define bv-len (bytevector-length bv))
+  (loop ((for i (up-from 0 (to bv-len)))
+         (for ans (listing-reverse (byte->hex (bytevector-u8-ref bv i)))))
+        => (string-concatenate-reverse ans)))
+
+(define (hex-string->bytevector str)
+  (define (hex-char? c)
+    (char-set-contains? char-set:hex-digit c))
+  (define (hex-string? str)
+    (string-for-each hex-char? str))
+  (define (hex-byte nibble0 nibble1)
+    (string->number (string nibble0 nibble1) 16))
+  (assert (even? (string-length str)))
+  (assert (hex-string? str))
+  (let* ((str-len (string-length str))
+         (bv (make-bytevector (/ str-len 2))))
+    (loop ((for i (up-from 0 (to str-len) (by 2)))
+           (for j (up-from 0))
+           (let c0 (string-ref str i))
+           (let c1 (string-ref str (+ i 1))))
+      (bytevector-u8-set! bv j (hex-byte c0 c1)))
+    bv))
 
 )
