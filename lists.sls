@@ -91,6 +91,8 @@
         map-accumulate-right
         mapAccumL ;; synonyms for above
         mapAccumR
+
+        partitions
         )
 (import (except (rnrs base) map)
         (rnrs control)
@@ -798,5 +800,30 @@
 
 (define mapAccumL map-accumulate)
 (define mapAccumR map-accumulate-right)
+
+(define (partitions lst)
+  ;; does a lot of wasted work, can probably write a better dynamic
+  ;; programming algorithm for this, or something
+  (define (partitions* lst n)
+    (append-map (lambda (i)
+                  (let-values (((first rest) (split-at lst i)))
+                    (if (null? rest)
+                        (list (list first))
+                        (map (lambda (rest)
+                               (cons first rest))
+                             (partitions* rest (- n i))))))
+                (iota n 1)))
+  (partitions* lst (length lst)))
+
+;; (equal? (partitions '()) '())
+;; (equal? (partitions '(a)) '(((a))))
+;; (equal? (partitions '(a b))
+;;         '(((a) (b))
+;;           ((a b))))
+;; (equal? (partitions '(a b c))
+;;         '(((a) (b) (c))
+;;           ((a) (b c))
+;;           ((a b) (c))
+;;           ((a b c))))
 
 )
