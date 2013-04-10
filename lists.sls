@@ -96,7 +96,7 @@
         )
 (import (except (rnrs base) map)
         (rnrs control)
-        (only (srfi :1) iota alist-cons append-reverse concatenate map make-list zip last drop-right member pair-fold pair-fold-right)
+        (only (srfi :1) iota alist-cons append-reverse concatenate map make-list zip last drop-right member pair-fold pair-fold-right append-map split-at)
         (except (rnrs lists) member)
         (rnrs hashtables)
         (wak foof-loop)
