@@ -42,7 +42,6 @@
     (set lens obj (func (get lens obj)))))
 
 (define (compose-lens lens2 lens1)
-  (get* lens1) (get* lens2) (set* lens1) (set* lens2)
   (make-lens
    (lambda (obj) (get lens2 (get lens1 obj)))
    (lambda (obj val) (set lens1 obj
