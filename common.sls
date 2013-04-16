@@ -25,6 +25,7 @@
         decr!
         where
         reciprocal
+        values->list
         )
 (import (rnrs base)
         (only (rnrs io ports) eof-object?)
@@ -121,4 +122,6 @@
 (define (reciprocal x)
   (/ 1 x))
 
+(define-syntax-rule (values->list form)
+  (call-with-values (lambda () form) list))
 )
