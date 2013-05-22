@@ -6,8 +6,10 @@
         coprime?
         relatively-prime?
         mod-inverse
-        extended-euclidean)
-(import (rnrs base))
+        extended-euclidean
+        sigmoid
+        )
+(import (rnrs base) (rnrs control))
 
 (define (proper-fraction n)
   (let ((f (floor n)))
@@ -56,4 +58,6 @@
          (values a 1 0)]
         [else (loop a b 0 1 1 0)]))
 
+(define (sigmoid t)
+  (/ 1 (+ 1 (exp (- t)))))
 )
