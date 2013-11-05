@@ -12,7 +12,7 @@
         )
 (import (rnrs base)
         (rnrs syntax-case)
-        (only (srfi :1) dotted-list?)
+        (only (srfi :1) dotted-list? cons*)
         (ijputils symbols)
         )
 (define (map-if predicate mapper list) ;from (familiars lists)
@@ -43,11 +43,11 @@
 
 (define (syntax-e obj)
   (syntax-case obj ()
-    [(first . rest)
-     (cons #'first #'rest)]
+    [(x ...)
+     (apply list #'(x ...))]
     [#(value ...)
      (apply vector #'(value ...))]
-    [a (syntax->datum #'a)]))
+    [a (syntax->dotted-list #'a)]))
 
 ;; Other ideas,
 ;; with-syntax*
