@@ -1,6 +1,7 @@
 #!r6rs
 (library (ijputils bytevectors)
 (export subbytevector
+        bytevector
         bytevector=?*
         bytevector-fold
         bytevector-zip
@@ -26,6 +27,9 @@
            (new-bv (make-bytevector difference)))
       (bytevector-copy! bv start new-bv 0 difference)
       new-bv)))
+
+(define (bytevector . args)
+  (u8-list->bytevector args))
 
 (define (bytevector=?* bv1 bv2)
   ;; a bytevector compare that the same amount of work regardless of
