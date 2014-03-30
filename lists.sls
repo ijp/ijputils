@@ -93,6 +93,12 @@
         mapAccumR
 
         partitions
+
+        length=?
+        length>?
+        length>=?
+        length<?
+        length<=?
         )
 (import (except (rnrs base) map)
         (rnrs control)
@@ -825,5 +831,35 @@
 ;;           ((a) (b c))
 ;;           ((a b) (c))
 ;;           ((a b c))))
+
+(define (length=? l n)
+  (assert (and (integer? n) (>= n 0)))
+  (let recur ((l l) (n n))
+    (cond ((zero? n) (null? l))
+          ((null? l) #f)
+          (else
+           (recur (cdr l) (- n 1))))))
+
+(define (length>? l n)
+  (not (length<=? l n)))
+
+(define (length<? l n)
+  (not (length>=? l n)))
+
+(define (length>=? l n)
+  (assert (and (integer? n) (>= n 0)))
+  (let recur ((l l) (n n))
+    (cond ((zero? n) #t)
+          ((null? l) #f)
+          (else
+           (recur (cdr l) (- n 1))))))
+
+(define (length<=? l n)
+  (assert (and (integer? n) (>= n 0)))
+  (let recur ((l l) (n n))
+    (cond ((null? l) #t)
+          ((zero? n) #f)
+          (else
+           (recur (cdr l) (- n 1))))))
 
 )
