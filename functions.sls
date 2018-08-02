@@ -23,6 +23,7 @@
         eta*
         )
 (import (rnrs base)
+        (rnrs lists)
         (only (ijputils common) define-syntax-rule))
 
 (define (compose . funs)

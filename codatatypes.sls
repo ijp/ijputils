@@ -5,12 +5,8 @@
         )
 (import (except (rnrs) member)
         (srfi :45)
-        (only (srfi :1) member count))
-
-(define registry
-  (make-hashtable (lambda (x)
-                    (equal-hash (syntax->datum x)))
-                  free-identifier=?))
+        (only (srfi :1) member count)
+        (for (ijputils private codatatypes) expand))
 
 (define-syntax define-codatatype
   (lambda (stx)
